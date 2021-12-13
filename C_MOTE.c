@@ -1,13 +1,11 @@
 #include <stdio.h>
+
 #include "pico/stdlib.h"
-#include "oled.h"
+#include "display_routines.h"
 
 int main()
 {
     stdio_init_all();
-    display_init(4, 5);
-    display_clear();
-    display_print("BELLA LI, GUARDA QUI\nCOSA CAZZO FAI");
-    display_update();
+    display_routines_init();
     return 0;
-}
+} // tp6 is bootsel

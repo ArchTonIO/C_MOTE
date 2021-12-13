@@ -6,6 +6,8 @@
 void display_init(uint8_t sda, uint8_t scl);
 void display_set_x_cursor(int x);
 void display_set_y_cursor(int y);
+void display_home_cursor();
+void display_set_pixel_cursor(uint8_t x, uint8_t y);
 void display_print(const char *str);
 void display_draw_letter_at(uint8_t x, uint8_t y, char c);
 void display_draw_bitmap(int16_t x,
@@ -22,4 +24,5 @@ void display_draw_animation(int16_t x,
                             uint16_t duration_ms);
 void display_update();
 void display_clear();
+
 #endif

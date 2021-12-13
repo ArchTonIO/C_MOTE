@@ -19,12 +19,12 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(C_MOTE C_MOTE.c oled.c)
+add_executable(C_MOTE C_MOTE.c oled.c buttons.c joysticks.c display_routines.c)
 
 pico_set_program_name(C_MOTE "C_MOTE")
 pico_set_program_version(C_MOTE "0.1")
 
-pico_enable_stdio_uart(C_MOTE 1)
+pico_enable_stdio_uart(C_MOTE 0)
 pico_enable_stdio_usb(C_MOTE 1)
 
 # Add the standard library to the build

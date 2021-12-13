@@ -1,7 +1,9 @@
 #include <string.h>
+#include <stdint.h>
+
+#include "oled.h"
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
-#include "oled.h"
 
 const uint8_t ssd1306_font6x8[] =
 	{
@@ -123,7 +125,7 @@ const uint8_t ssd1306_font6x8[] =
 #define SET_VCOM_DESEL 0xDB
 #define SET_CHARGE_PUMP 0x8D
 
-//typedef uint8_t uint8_t;
+// typedef uint8_t uint8_t;
 #define I2C_PORT i2c0
 volatile bool animation_timer_fired;
 
@@ -137,15 +139,15 @@ const uint8_t height = 64;
 #endif
 */
 
-//const uint8_t SID = (height == 64) ? 0x3C : 0x3D; // different height displays have different addr
+// const uint8_t SID = (height == 64) ? 0x3C : 0x3D; // different height displays have different addr
 const uint8_t SID = 0x3C; // different height displays have different addr
 const uint8_t width = 128;
-//const int pages = height / 8;
-//const bool external_vcc = false;
+// const int pages = height / 8;
+// const bool external_vcc = false;
 
 int pages() { return height / 8; }
 
-//uint8_t scr[pages*width+1]; // extra byte holds data send instruction
+// uint8_t scr[pages*width+1]; // extra byte holds data send instruction
 uint8_t scr[1025]; // being: 8 pages (max) * 128 width + 1 I2C command byte
 
 void write_cmd(uint8_t cmd);
@@ -235,9 +237,9 @@ void display_init(uint8_t sda, uint8_t scl)
 		SET_DISP_OFFSET,		// 0xD3
 		0x00,
 
-		//SET_COM_PIN_CFG, // 0xDA
-		//0x02 if self.width > 2 * self.height else 0x12,
-		//width > 2*height ? 0x02 : 0x12,
+		// SET_COM_PIN_CFG, // 0xDA
+		// 0x02 if self.width > 2 * self.height else 0x12,
+		// width > 2*height ? 0x02 : 0x12,
 		SET_COM_PIN_CFG, (uint8_t)(height == 32 ? 0x02 : 0x12),
 
 		//# timing and driving scheme
@@ -245,12 +247,12 @@ void display_init(uint8_t sda, uint8_t scl)
 		0x80,
 
 		SET_PRECHARGE, // 0xD9
-		//0x22 if self.external_vcc else 0xF1,
-		//external_vcc ? 0x22 : 0xF1,
+		// 0x22 if self.external_vcc else 0xF1,
+		// external_vcc ? 0x22 : 0xF1,
 		0xF1,
 
 		SET_VCOM_DESEL, // 0xDB
-		//0x30,  //# 0.83*Vcc
+		// 0x30,  //# 0.83*Vcc
 		0x40, // changed by mcarter
 
 		//# display
@@ -261,8 +263,8 @@ void display_init(uint8_t sda, uint8_t scl)
 		SET_NORM_INV,  //# not inverted 0xA6
 
 		SET_CHARGE_PUMP, // 0x8D
-		//0x10 if self.external_vcc else 0x14,
-		//external_vcc ? 0x10 : 0x14,
+		// 0x10 if self.external_vcc else 0x14,
+		// external_vcc ? 0x10 : 0x14,
 		0x14,
 
 		SET_DISP | 0x01};
@@ -280,7 +282,7 @@ void draw_pixel(int16_t x, int16_t y, int color)
 		return;
 
 	int page = y / 8;
-	//page = y/pages;
+	// page = y/pages;
 	int bit = 1 << (y % 8);
 	int xincr = 8;
 	xincr = height / 8;
@@ -294,7 +296,7 @@ void draw_pixel(int16_t x, int16_t y, int color)
 	case 0: // black
 		*ptr &= ~bit;
 		break;
-	case -1: //inverse
+	case -1: // inverse
 		*ptr ^= bit;
 		break;
 	}
@@ -403,4 +405,16 @@ void display_set_y_cursor(int y)
 {
 	const int pos = 8;
 	cursory = pos * y;
+}
+
+void display_home_cursor()
+{
+	display_set_x_cursor(0);
+	display_set_y_cursor(0);
+}
+
+void display_set_pixel_cursor(uint8_t x, uint8_t y)
+{
+	cursorx = x;
+	cursory = y;
 }
