@@ -418,3 +418,15 @@ void display_set_pixel_cursor(uint8_t x, uint8_t y)
 	cursorx = x;
 	cursory = y;
 }
+
+void display_clear_area(uint8_t x, uint8_t y, uint16_t w, uint16_t h)
+{
+	display_set_pixel_cursor(x, y);
+	for (uint8_t i = 0; i < h; i++)
+	{
+		for (uint8_t j = 0; j < w; j++)
+		{
+			draw_pixel(j, i, 0);
+		}
+	}
+}

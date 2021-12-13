@@ -24,5 +24,6 @@ void display_draw_animation(int16_t x,
                             uint16_t duration_ms);
 void display_update();
 void display_clear();
+void display_clear_area(uint8_t x, uint8_t y, uint16_t w, uint16_t h);
 
 #endif
