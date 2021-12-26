@@ -20,8 +20,10 @@ void display_routines_init()
     {
         x = joystickA_read_x_direction();
         y = joystickA_read_y_direction();
-        buttons_update_states();
-        if (x == 0 && y == 0)
+        printf("%d", x);
+        printf("||");
+        printf("%d\n", y);
+     /*    if (x == 0 && y == 0)
         {
             display_draw_bitmap(x_displacement, y_displacement, center, 36, 36, 1);
             display_update();
@@ -65,15 +67,6 @@ void display_routines_init()
         {
             display_draw_bitmap(x_displacement, y_displacement, lower_right, 36, 36, 1);
             display_update();
-        }
-        if (button_get_state("A") == false)
-        {
-            display_clear();
-            display_draw_bitmap(116, 52, button_empty, 12, 12, 1);
-        }
-        else
-        {
-            display_draw_bitmap(116, 52, button_full, 12, 12, 1);
-        }
+        } */
     }
 }

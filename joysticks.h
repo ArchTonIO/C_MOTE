@@ -2,13 +2,13 @@
 #define JOYSTICKS_H
 
 /* joysticks GPIO pins declaration */
-#define JOYSTICKA_X_AXIS_GPIO_PIN 27
-#define JOYSTICKA_Y_AXIS_GPIO_PIN 26
+#define JOYSTICKA_X_AXIS_GPIO_PIN 26
+#define JOYSTICKA_Y_AXIS_GPIO_PIN 27
 #define JOYSTICKB_Y_AXIS_GPIO_PIN 28
 
 /* joysticks ADC pins declaration */
-#define JOYSTICKA_X_AXIS_ADC_PIN 1
-#define JOYSTICKA_Y_AXIS_ADC_PIN 0
+#define JOYSTICKA_X_AXIS_ADC_PIN 0
+#define JOYSTICKA_Y_AXIS_ADC_PIN 1
 #define JOYSTICKB_Y_AXIS_ADC_PIN 2
 
 /* joysticks functions */
